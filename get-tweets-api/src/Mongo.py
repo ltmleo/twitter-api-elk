@@ -24,6 +24,13 @@ class Mongo:
         #myquery = { "address": "Park Lane 38" }
         return self.mycol.find(myquery)
 
-    def moreFollowers(self, number):
-        all = list(self.mycol.find({}).sort("followers", pymongo.DESCENDING).limit(5))
-        print(all)
+    def mostFollowed(self, number):
+        mostFollowed = []
+        auxList = [] #The user can gain followers
+        for x in list(self.mycol.find({}).sort("followers", pymongo.DESCENDING)):
+            if (len(mostFollowed) < number) and x["user"] not in auxList:
+                auxList.append(x["user"])
+                mostFollowed.append({"user": x["user"], "followers": x["followers"]})
+            elif(len(mostFollowed) >= number):
+                break
+        return mostFollowed
