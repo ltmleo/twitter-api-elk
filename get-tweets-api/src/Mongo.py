@@ -41,6 +41,23 @@ class Mongo:
             tweetByHour[x["_id"]["hour"]] = x["count"]
         return {i: tweetByHour[i] for i in range(24)}
     
-    def getByLang(self):
-        return list(self.mycol.aggregate([
-            {"$group": {"_id": {"lang": {"lang": "$language"}}, "count": {"$sum": 1}}}]))
+    def getByLang(self, hashtag):
+        resultTotal = {}
+        resultPartial = {}
+        for x in list(self.mycol.aggregate([
+            {"$group": {"_id": {"language": {"language": "$language"}, "hashtag": {"hashtag": hashtag}}, "count": {"$sum": 1}}}])):
+            resultPartial[str(x["_id"]["language"]["language"])] = x["count"]
+            resultTotal[str(x["_id"]["hashtag"]["hashtag"])] = resultPartial
+        return resultTotal
+
+        
+    def getByCountry(self, hashtag):
+        resultTotal = {}
+        resultPartial = {}
+        for x in list(self.mycol.aggregate([
+            {"$group": {"_id": {"country": {"country": "$country"}, "hashtag": {"hashtag": hashtag}}, "count": {"$sum": 1}}}])):
+            resultPartial[str(x["_id"]["country"]["country"])] = x["count"]
+            resultTotal[str(x["_id"]["hashtag"]["hashtag"])] = resultPartial
+        return resultTotal
+
+
