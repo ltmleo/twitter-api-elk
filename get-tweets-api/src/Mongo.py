@@ -22,7 +22,8 @@ class Mongo:
 
     def query(self, myquery):
         #myquery = { "address": "Park Lane 38" }
-        return self.mycol.find(myquery).sort("followers", pymongo.DESCENDING).limit(5)
+        return self.mycol.find(myquery)
 
     def moreFollowers(self, number):
-        return self.mycol.find({}).sort("followers", pymongo.DESCENDING).limit(5)
+        all = list(self.mycol.find({}).sort("followers", pymongo.DESCENDING).limit(5))
+        print(all)
