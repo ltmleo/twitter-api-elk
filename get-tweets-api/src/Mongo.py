@@ -1,5 +1,4 @@
 import pymongo
-
 class Mongo:
     def __init__(self, dbName, colName):
         myclient = pymongo.MongoClient("mongodb://localhost:27017/")
@@ -20,7 +19,7 @@ class Mongo:
         else:
             return {"status": "duplicated"}
 
-    def getMostFollowed(self, topic, number):
+    def getMostFollowed(self, topic = {}, number = 5):
         mostFollowed = []
         auxList = [] #The user can gain followers
         for x in list(self.mycol.find(topic).sort("followers", pymongo.DESCENDING)):
@@ -41,7 +40,7 @@ class Mongo:
             tweetByHour[x["_id"]["hour"]] = x["count"]
         return {i: tweetByHour[i] for i in range(24)}
     
-    def getByLang(self, hashtag):
+    def getByLang(self, hashtag = "$hashtag"):
         resultTotal = {}
         resultPartial = {}
         for x in list(self.mycol.aggregate([
@@ -49,9 +48,8 @@ class Mongo:
             resultPartial[str(x["_id"]["language"]["language"])] = x["count"]
             resultTotal[str(x["_id"]["hashtag"]["hashtag"])] = resultPartial
         return resultTotal
-
         
-    def getByCountry(self, hashtag):
+    def getByCountry(self, hashtag = "$hashtag"):
         resultTotal = {}
         resultPartial = {}
         for x in list(self.mycol.aggregate([
