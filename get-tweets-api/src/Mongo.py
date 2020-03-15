@@ -20,17 +20,19 @@ class Mongo:
         else:
             return {"status": "duplicated"}
 
-    def query(self, myquery):
-        #myquery = { "address": "Park Lane 38" }
-        return self.mycol.find(myquery)
-
-    def mostFollowed(self, number):
+    def getMostFollowed(self, topic, number):
         mostFollowed = []
         auxList = [] #The user can gain followers
-        for x in list(self.mycol.find({}).sort("followers", pymongo.DESCENDING)):
+        for x in list(self.mycol.find(topic).sort("followers", pymongo.DESCENDING)):
             if (len(mostFollowed) < number) and x["user"] not in auxList:
                 auxList.append(x["user"])
                 mostFollowed.append({"user": x["user"], "followers": x["followers"]})
             elif(len(mostFollowed) >= number):
                 break
         return mostFollowed
+    
+    def getHashTags(self):
+        return list(self.mycol.distinct("hashtag"))
+    
+    def getTweetPerHour(self):
+        
