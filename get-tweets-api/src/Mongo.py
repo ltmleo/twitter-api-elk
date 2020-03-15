@@ -43,4 +43,4 @@ class Mongo:
     
     def getByLang(self):
         return list(self.mycol.aggregate([
-            {"$group": {"_id": {"lang": {"lang": "$lang"}}, "count": {"$sum": 1}}}]))
+            {"$group": {"_id": {"lang": {"lang": "$language"}}, "count": {"$sum": 1}}}]))
