@@ -20,7 +20,7 @@ class Twitter:
             tweetList.append({"hashtag": hashTag, 
                 "user": tweet.user.screen_name, 
                 "followers": tweet.user.followers_count,
-                "date": str(tweet.created_at),
+                "date": tweet.created_at,
                 "language": tweet.lang,
                 "country": tweet.user.location})
         return tweetList

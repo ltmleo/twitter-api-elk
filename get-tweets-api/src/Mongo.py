@@ -34,5 +34,13 @@ class Mongo:
     def getHashTags(self):
         return list(self.mycol.distinct("hashtag"))
     
-    def getTweetPerHour(self):
-        
+    def getByHour(self):
+        tweetByHour = {}
+        for x in list(self.mycol.aggregate([
+            {"$group": {"_id": {"hour": {"$hour": "$date"}}, "count": {"$sum": 1}}}])):
+            tweetByHour[x["_id"]["hour"]] = x["count"]
+        return {i: tweetByHour[i] for i in range(24)}
+    
+    def getByLang(self):
+        return list(self.mycol.aggregate([
+            {"$group": {"_id": {"lang": {"lang": "$lang"}}, "count": {"$sum": 1}}}]))
