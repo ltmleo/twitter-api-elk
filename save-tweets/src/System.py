@@ -24,20 +24,20 @@ class Log:
         handler.setFormatter(formatter)
         self.logger.addHandler(handler)
         self.info("Init logger")
-        
+
     def error(self, message):
-        self.logger.error(f"python-logstash-async: {message}")
+        self.logger.error(f"save-tweets: {message}")
         print(f"ERROR: {message}")
 
     def info(self, message):
-        self.logger.info(f"python-logstash-async: {message}")
+        self.logger.info(f"save-tweets: {message}")
         print(f"INFO: {message}")
 
     def warning(self, message):
-        self.logger.warning(f"python-logstash-async: {message}")
+        self.logger.warning(f"save-tweets: {message}")
         print(f"WARNING: {message}")
 
     def debug(self, message):
-        self.logger.debug(f"python-logstash-async: {message}")
+        self.logger.debug(f"save-tweets: {message}")
         print(f"DEBUG: {message}")
 
