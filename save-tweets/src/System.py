@@ -5,7 +5,7 @@ class System:
     def __init__(self, group):
         self.WORKDIR=os.path.dirname(os.path.abspath(__file__))
         config = configparser.ConfigParser()
-        config.read(f"{self.WORKDIR}/../project.properties")
+        config.read(f"{self.WORKDIR}/.../env/project.properties")
         self.ENV=dict(config.items(group))
 
 class Log:
@@ -13,9 +13,10 @@ class Log:
         self.logger = logging.getLogger("logstash")
         self.logger.setLevel(logging.INFO)        
         host = os.environ["LOGSTASH_HOST"]
+        port = os.environ["LOGSTASH_PORT"]
         handler = AsynchronousLogstashHandler(
             host=host, 
-            port=8080, 
+            port=port, 
             ssl_enable=False, 
             ssl_verify=False,
             database_path='')

@@ -1,0 +1,80 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+{{- if .Values.deployAnnotations }}
+{{ toYaml .Values.deployAnnotations | indent 4 }}
+{{- end }}
+  name: {{ template "microService" . }}
+  labels:
+    app: {{ template "microService" . }}
+    chart: {{ template "ms-nodejs.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      annotations:
+{{- if .Values.podAnnotations }}
+{{ toYaml .Values.podAnnotations | indent 8 }}
+{{- end }}
+      labels:
+        app: {{ template "microService" . }}
+        release: {{ template "microService" . }}
+        version: {{ .Values.service.version }}
+    strategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 1
+    spec:
+      containers:
+        - name: {{ template "microService" . }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.internalPort }}
+          readinessProbe:
+          {{- if .Values.readiness }}
+            failureThreshold: {{ .Values.readiness.failureThreshold }}
+            httpGet:
+              path: {{ .Values.readiness.path }}
+              port: {{ .Values.service.internalPort }}
+              scheme: {{ .Values.readiness.scheme }}
+            initialDelaySeconds: {{ .Values.readiness.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.readiness.timeoutSeconds }}
+            periodSeconds: {{ .Values.readiness.periodSeconds }}
+            successThreshold: {{ .Values.readiness.successThreshold }}
+          {{ end }}          
+          livenessProbe:
+          {{- if .Values.liveness }}
+            failureThreshold: {{ .Values.liveness.failureThreshold }}
+            httpGet:
+              path: {{ .Values.liveness.path }}
+              port: {{ .Values.service.internalPort }}
+              scheme: {{ .Values.liveness.scheme }}
+            initialDelaySeconds: {{ .Values.liveness.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.liveness.timeoutSeconds }}
+            periodSeconds: {{ .Values.liveness.periodSeconds }}
+            successThreshold: {{ .Values.liveness.successThreshold }}
+          {{ end }}
+
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+          env:
+{{ toYaml .Values.env | indent 12 }}
+      hostAliases:
+{{ toYaml .Values.hostAliases | indent 8 }}
+      nodeSelector:
+{{- if .Values.nodeSelector }}
+{{ toYaml .Values.nodeSelector | trim | indent 8  }}
+{{- end }}

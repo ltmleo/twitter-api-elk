@@ -1,0 +1,57 @@
+# Default values for ms-nodejs.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+podAnnotations: []
+deployAnnotations: []
+
+image:
+  repository: leonardomontero/twitter-api-case
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  internalPort: 8081
+  targetPort: 8081
+  version: v1
+
+readiness:
+  failureThreshold: 3
+  path: /healthcheck
+  initialDelaySeconds: 30
+  timeoutSeconds: 15
+  periodSeconds: 30
+  scheme: HTTP
+  successThreshold: 1
+
+liveness:
+  failureThreshold: 3
+  path: /healthcheck
+  initialDelaySeconds: 30
+  timeoutSeconds: 15
+  periodSeconds: 30
+  scheme: HTTP
+  successThreshold: 1
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 0.8G
+  limits:
+    memory: 0.8G
+
+hpa:
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+
+env:
+- name: LOGSTASH_HOST
+  value: 'logstash-logstash'
+- name: LOGSTASH_PORT
+  value: 5044
+
+nodeSelector: []

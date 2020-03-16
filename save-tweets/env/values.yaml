@@ -1,0 +1,13 @@
+readiness: false
+liveness: false
+
+image:
+  repository: leonardomontero/twitter-api-case
+  tag: save-tweets-1
+  pullPolicy: IfNotPresent
+
+env:
+- name: LOGSTASH_HOST
+  value: 'logstash-logstash'
+- name: LOGSTASH_PORT
+  value: 5044
