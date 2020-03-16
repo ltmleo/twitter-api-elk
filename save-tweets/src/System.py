@@ -12,9 +12,9 @@ class Log:
     def __init__(self):
         self.logger = logging.getLogger("logstash")
         self.logger.setLevel(logging.INFO)        
-
+        host = os.environ["LOGSTASH_HOST"]
         handler = AsynchronousLogstashHandler(
-            host='localhost', 
+            host=host, 
             port=8080, 
             ssl_enable=False, 
             ssl_verify=False,
