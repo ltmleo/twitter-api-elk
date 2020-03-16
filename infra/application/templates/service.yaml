@@ -5,7 +5,7 @@ metadata:
   name: {{ template "microService" . }}
   labels:
     app: {{ template "microService" . }}
-    chart: {{ template "ms-nodejs.chart" . }}
+    chart: {{ template "twitter-api-case.chart" . }}
     release: {{ template "microService" . }}
     heritage: {{ .Release.Service }}
 spec:

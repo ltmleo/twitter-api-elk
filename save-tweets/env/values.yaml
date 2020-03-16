@@ -10,4 +10,4 @@ env:
 - name: LOGSTASH_HOST
   value: 'logstash-logstash'
 - name: LOGSTASH_PORT
-  value: 5044
+  value: '5044'

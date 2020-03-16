@@ -8,7 +8,7 @@ metadata:
   name: {{ template "microService" . }}
   labels:
     app: {{ template "microService" . }}
-    chart: {{ template "ms-nodejs.chart" . }}
+    chart: {{ template "twitter-api-case.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
         - name: {{ template "microService" . }}
-          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.service.internalPort }}
@@ -72,8 +72,6 @@ spec:
     {{- end }}
           env:
 {{ toYaml .Values.env | indent 12 }}
-      hostAliases:
-{{ toYaml .Values.hostAliases | indent 8 }}
       nodeSelector:
 {{- if .Values.nodeSelector }}
 {{ toYaml .Values.nodeSelector | trim | indent 8  }}
