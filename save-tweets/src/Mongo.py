@@ -1,9 +1,10 @@
 import pymongo
-
+from src import System
+l = System.Log()
 class Mongo:
     def __init__(self, dbName, colName):
         mongoAddress = "mongodb://localhost:27017/"
-        print(f"Connecting to {mongoAddress}")
+        l.info(f"Connecting to {mongoAddress}")
         myclient = pymongo.MongoClient(mongoAddress)
         mydb = myclient[dbName]
         self.mycol = mydb[colName]
@@ -18,10 +19,10 @@ class Mongo:
     def insert(self, mylist):
         if self.__avoidDuplication(mylist):
             x = self.mycol.insert_many(mylist)
-            print(f"{len(mylist)} objects inserted")
+            l.info(f"{len(mylist)} objects inserted")
             return x.inserted_ids
         else:
-            print(f"{len(mylist)} objects duplicated")
+            l.info(f"{len(mylist)} objects duplicated")
             return {"status": "duplicated"}
 
     def query(self, myquery):

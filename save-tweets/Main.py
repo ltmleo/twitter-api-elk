@@ -1,5 +1,7 @@
-from src import Twitter, Mongo
+from src import Twitter, Mongo, System
 import time
+
+l = System.Log()
 
 def main():
     tw = Twitter.Twitter()
@@ -10,11 +12,11 @@ def main():
                     "#oauth", "#swagger", "#raml", "#openapis"]
 
     for hashTag in hashTagsList:
-        print(f"Getting tweets for {hashTag}")
+        l.info(f"Getting tweets for {hashTag}")
         mdb.insert(tw.getHashTag(hashTag))
 
 while True:
     main()
-    print("Sleeping for 1 hour")
+    l.info("Sleeping for 1 hour")
     time.sleep(3600)
 
