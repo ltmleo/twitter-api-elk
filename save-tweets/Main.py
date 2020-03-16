@@ -13,7 +13,10 @@ def main():
 
     for hashTag in hashTagsList:
         l.info(f"Getting tweets for {hashTag}")
-        mdb.insert(tw.getHashTag(hashTag))
+        try:
+            mdb.insert(tw.getHashTag(hashTag))
+        except:
+            l.error(f"timeout to inser {hashTag}")
 
 while True:
     main()
