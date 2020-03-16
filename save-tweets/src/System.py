@@ -11,19 +11,20 @@ class System:
 class Log:
     def __init__(self):
         self.logger = logging.getLogger("logstash")
-        self.logger.setLevel(logging.ERROR)        
+        self.logger.setLevel(logging.INFO)        
 
         handler = AsynchronousLogstashHandler(
-            host='your-logstash-host', 
-            port="8080", 
-            ssl_enable=True, 
+            host='localhost', 
+            port=8080, 
+            ssl_enable=False, 
             ssl_verify=False,
             database_path='')
 
         formatter = LogstashFormatter()
         handler.setFormatter(formatter)
         self.logger.addHandler(handler)
-
+        self.info("Init logger")
+        
     def error(self, message):
         self.logger.error(f"python-logstash-async: {message}")
         print(f"ERROR: {message}")

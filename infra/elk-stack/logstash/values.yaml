@@ -8,12 +8,13 @@ logstashConfig:
     http.host: "0.0.0.0"
     xpack.monitoring.elasticsearch.hosts: [ "http://elasticsearch-master:9200" ]
 
+
 # Allows you to add any pipeline files in /usr/share/logstash/pipeline/
 ### ***warn*** there is a hardcoded logstash.conf in the image, override it first
 logstashPipeline: 
-  logstash.conf: |
+ logstash.conf: |
     input {
-      tcp {
+        tcp {
               port => 5044
               codec => json
           }
