@@ -1,4 +1,4 @@
-import os, configparser, logging
+import os, configparser, logging, time
 from logstash_async.handler import AsynchronousLogstashHandler
 from logstash_async.handler import LogstashFormatter
 class System:
@@ -10,6 +10,7 @@ class System:
 
 class Log:
     def __init__(self):
+        self.time = 
         self.logger = logging.getLogger("logstash")
         self.logger.setLevel(logging.INFO)        
         host = os.environ["LOGSTASH_HOST"]
