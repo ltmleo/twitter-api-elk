@@ -1,7 +1,11 @@
-import pymongo
+import pymongo, os
+from src import System
+l = System.Log()
 class Mongo:
     def __init__(self, dbName, colName):
-        myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+        mongoAddress = f"{os.environ['MONGO_HOST']}:{os.environ['MONGO_PORT']}"
+        l.info(f"Connecting to {mongoAddress}")
+        myclient = pymongo.MongoClient(mongoAddress)
         mydb = myclient[dbName]
         self.mycol = mydb[colName]
 

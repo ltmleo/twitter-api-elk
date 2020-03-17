@@ -1,0 +1,15 @@
+
+image:
+  repository: leonardomontero/twitter-api-case
+  tag: get-tweets-api-5
+  pullPolicy: IfNotPresent
+
+env:
+- name: LOGSTASH_HOST
+  value: 'logstash-logstash'
+- name: LOGSTASH_PORT
+  value: '5044'
+- name: MONGO_HOST
+  value: 'mongodb'
+- name: MONGO_PORT
+  value: '27017'

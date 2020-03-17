@@ -1,13 +1,6 @@
-import os, configparser, logging,
+import os, configparser, logging
 from logstash_async.handler import AsynchronousLogstashHandler
 from logstash_async.handler import LogstashFormatter
-class System:
-    def __init__(self, group):
-        self.WORKDIR=os.path.dirname(os.path.abspath(__file__))
-        config = configparser.ConfigParser()
-        config.read(f"{self.WORKDIR}/../env/project.properties")
-        self.ENV=dict(config.items(group))
-
 class Log:
     def __init__(self):
         self.logger = logging.getLogger("logstash")
@@ -27,18 +20,18 @@ class Log:
         self.info("Init logger")
 
     def error(self, message):
-        self.logger.error(f"save-tweets: {message}")
+        self.logger.error(f"get-tweets-api: {message}")
         print(f"ERROR: {message}")
 
     def info(self, message):
-        self.logger.info(f"save-tweets: {message}")
+        self.logger.info(f"get-tweets-api: {message}")
         print(f"INFO: {message}")
 
     def warning(self, message):
-        self.logger.warning(f"save-tweets: {message}")
+        self.logger.warning(f"get-tweets-api: {message}")
         print(f"WARNING: {message}")
 
     def debug(self, message):
-        self.logger.debug(f"save-tweets: {message}")
+        self.logger.debug(f"get-tweets-api: {message}")
         print(f"DEBUG: {message}")
 
