@@ -3,7 +3,7 @@ liveness: false
 
 image:
   repository: leonardomontero/twitter-api-case
-  tag: save-tweets-4
+  tag: save-tweets-5
   pullPolicy: IfNotPresent
 
 env:
@@ -11,3 +11,7 @@ env:
   value: 'logstash-logstash'
 - name: LOGSTASH_PORT
   value: '5044'
+- name: LOGSTASH_HOST
+  value: 'mongodb'
+- name: LOGSTASH_PORT
+  value: '27017'
