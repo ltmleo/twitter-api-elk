@@ -1,4 +1,4 @@
-FROM leonardomontero/twitter-api-case:1.0.0
+FROM leonardomontero/twitter-api-case:1.0.2
 
 WORKDIR /app
 

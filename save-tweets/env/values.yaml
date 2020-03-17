@@ -3,7 +3,7 @@ liveness: false
 
 image:
   repository: leonardomontero/twitter-api-case
-  tag: save-tweets-1
+  tag: save-tweets-4
   pullPolicy: IfNotPresent
 
 env:
