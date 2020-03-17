@@ -1,4 +1,4 @@
-import os, configparser, logging
+import os, configparser, logging,
 from logstash_async.handler import AsynchronousLogstashHandler
 from logstash_async.handler import LogstashFormatter
 class System:
