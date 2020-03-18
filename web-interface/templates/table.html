@@ -1,0 +1,17 @@
+<!doctype html>
+<title>Simple tables</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+<div class=page>
+  <h1>Tweets per Country</h1>
+        {% for key, value in result.items() %}
+        <h2>{{ key }}</h2>
+        <table >
+            {% for key2, value2 in value.items() %}
+               <tr>
+                    <th> {{ key2 }} </th>
+                    <td> {{ value2 }} </td>
+               </tr>
+            {% endfor %}
+            </table>
+        {% endfor %}
+</div>
