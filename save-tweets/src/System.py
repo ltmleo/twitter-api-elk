@@ -11,9 +11,15 @@ class System:
 class Log:
     def __init__(self):
         self.logger = logging.getLogger("logstash")
-        self.logger.setLevel(logging.INFO)        
-        host = os.environ["LOGSTASH_HOST"]
-        port = int(os.environ["LOGSTASH_PORT"])
+        self.logger.setLevel(logging.INFO)
+        try:       
+            host = os.environ["LOGSTASH_HOST"]
+        except:
+            host = "localhost"
+        try:
+            port = int(os.environ["LOGSTASH_PORT"])
+        except:
+            port = 5044
         handler = AsynchronousLogstashHandler(
             host=host, 
             port=port, 
@@ -27,18 +33,18 @@ class Log:
         self.info("Init logger")
 
     def error(self, message):
-        self.logger.error(f"save-tweets: {message}")
-        print(f"ERROR: {message}")
+        self.logger.error({"app": "save-tweets", "message": message})
+        print({"level": "error", "message": message})
 
     def info(self, message):
-        self.logger.info(f"save-tweets: {message}")
-        print(f"INFO: {message}")
+        self.logger.info({"app": "save-tweets", "message": message})
+        print({"level": "info", "message": message})
 
     def warning(self, message):
-        self.logger.warning(f"save-tweets: {message}")
-        print(f"WARNING: {message}")
+        self.logger.warning({"app": "save-tweets", "message": message})
+        print({"level": "warning", "message": message})
 
     def debug(self, message):
-        self.logger.debug(f"save-tweets: {message}")
-        print(f"DEBUG: {message}")
+        self.logger.debug({"app": "save-tweets", "message": message})
+        print({"level": "debug", "message": message})
 

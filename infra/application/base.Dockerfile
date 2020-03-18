@@ -6,6 +6,6 @@ ENV PYTHONUNBUFFERED=1
 
 RUN pip3 install pymongo cryptography \
     tweepy python-logstash_async configparser \
-    flask flask_restful blinker elastic-apm
-    
+    flask flask_restful blinker elastic-apm flask_restplus \
+    werkzeug==0.16.0
 

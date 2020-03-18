@@ -1,8 +1,15 @@
 
 image:
   repository: leonardomontero/twitter-api-case
-  tag: get-tweets-api-5
+  tag: get-tweets-api-12
   pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  nodePort: 30003
+  internalPort: 8081
+  targetPort: 8081
+  version: v1
 
 env:
 - name: LOGSTASH_HOST

@@ -3,7 +3,10 @@ from src import System
 l = System.Log()
 class Mongo:
     def __init__(self, dbName, colName):
-        mongoAddress = f"{os.environ['MONGO_HOST']}:{os.environ['MONGO_PORT']}"
+        try:
+            mongoAddress = f"{os.environ['MONGO_HOST']}:{os.environ['MONGO_PORT']}"
+        except:
+            mongoAddress = "mongodb://localhost:27017/"
         l.info(f"Connecting to {mongoAddress}")
         myclient = pymongo.MongoClient(mongoAddress)
         mydb = myclient[dbName]
