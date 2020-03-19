@@ -59,11 +59,5 @@ def getByLang(topic):
     data = dict(requests.get(f"{GET_TWEETS_API_ENDPOINT}/getByLang{topic}").json())
     return render_template('table.html',result=data)
 
-@app.route('/pie')
-def pie():
-    pie_labels = labels
-    pie_values = values
-    return render_template('pie_chart.html', title='Bitcoin Monthly Price in USD', max=max(values), set=zip(values, labels, colors))
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
