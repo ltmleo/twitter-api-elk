@@ -55,9 +55,8 @@ Para acessar a documentação completa dos métodos disponíveis da API, pode-se
 - Adicionar API-KEY;
 - Fazer com que o healthcheck realize testes nos metodos;
 
-### web-interface
-
-
+### web-interface [WIP]
+TODO
 #### Operação
 #### Melhorias
  

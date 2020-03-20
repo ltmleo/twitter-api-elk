@@ -1,16 +1,6 @@
 #!/bin/bash
 set -e
-#baixar helm
-#minikube start (verificar)
-#helm init
-
-# if test -z $1 ; then
-#   echo "Missing Password"
-#   exit 1
-# fi
-
  
-#!/usr/bin/env bash
 
 print_help() {
             echo "Uso: $0 [OPÇÕES]..."
@@ -42,6 +32,7 @@ update_apps(){
     test $PASSWORD || (echo "[ERROR] missing password" && print_help && exit 1)
     helm upgrade --install  save-tweets ./infra/application/ -f ./save-tweets/env/values.yaml --set password=${PASSWORD}
     helm upgrade --install  get-tweets-api ./infra/application/ -f ./get-tweets-api/env/values.yaml
+    helm upgrade --install  web-interface ./infra/application/ -f ./web-interface/env/values.yaml
 }
 
 delete(){
