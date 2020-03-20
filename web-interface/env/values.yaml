@@ -1,14 +1,17 @@
 
+readiness: false
+liveness: false
+
 image:
   repository: leonardomontero/twitter-api-case
-  tag: web-interface-1
+  tag: web-interface-2
   pullPolicy: IfNotPresent
 
 service:
   type: NodePort
   nodePort: 30004
-  internalPort: 8081
-  targetPort: 8081
+  internalPort: 8080
+  targetPort: 8080
   version: v1
 
 env:
@@ -16,3 +19,5 @@ env:
   value: 'logstash-logstash'
 - name: LOGSTASH_PORT
   value: '5044'
+- name: GET_TWEETS_API_ENDPOINT
+  value: 'http://get-tweets-api:8081'

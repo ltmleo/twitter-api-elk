@@ -4,7 +4,7 @@ import os, requests
 app = Flask(__name__)
 
 try:
-    os.environ["GET_TWEETS_API_ENDPOINT"]
+    GET_TWEETS_API_ENDPOINT = os.environ["GET_TWEETS_API_ENDPOINT"]
 except:
     GET_TWEETS_API_ENDPOINT = "http://localhost:8081"
 
@@ -24,7 +24,6 @@ def mostFollowed(topic, number):
         topic = f"{topic}/"
     labels = []
     values = []
-    print(f"{GET_TWEETS_API_ENDPOINT}/mostFolowed/{topic}{number}")
     data = list(requests.get(f"{GET_TWEETS_API_ENDPOINT}/mostFolowed/{topic}{number}").json())
     for i in data:
         labels.append(i["user"])
