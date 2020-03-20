@@ -4,7 +4,7 @@ liveness: false
 
 image:
   repository: leonardomontero/twitter-api-case
-  tag: web-interface-3
+  tag: web-interface-4
   pullPolicy: IfNotPresent
 
 service:

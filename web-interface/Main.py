@@ -4,7 +4,7 @@ from elasticapm.contrib.flask import ElasticAPM
 from elasticapm.handlers.logging import LoggingHandler
 
 app = Flask(__name__)
-apm = ElasticAPM(app, server_url='http://apm-server-apm-server:8200', service_name='web-interface', logging=True)
+#apm = ElasticAPM(app, server_url='http://apm-server-apm-server:8200', service_name='web-interface', logging=True)
 
 
 try:
@@ -61,6 +61,10 @@ def getByLang(topic):
         topic = f"/{topic}"
     data = dict(requests.get(f"{GET_TWEETS_API_ENDPOINT}/getByLang{topic}").json())
     return render_template('table.html',result=data)
+
+@app.route("/")
+def index():
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
