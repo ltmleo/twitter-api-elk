@@ -1,7 +1,11 @@
 from flask import Flask, Markup, render_template
 import os, requests
+from elasticapm.contrib.flask import ElasticAPM
+from elasticapm.handlers.logging import LoggingHandler
 
 app = Flask(__name__)
+apm = ElasticAPM(app, server_url='http://apm-server-apm-server:8200', service_name='web-interface', logging=True)
+
 
 try:
     GET_TWEETS_API_ENDPOINT = os.environ["GET_TWEETS_API_ENDPOINT"]

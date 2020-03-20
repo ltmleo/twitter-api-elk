@@ -56,17 +56,37 @@ Para acessar a documentação completa dos métodos disponíveis da API, pode-se
 - Fazer com que o healthcheck realize testes nos metodos;
 
 ### web-interface [WIP]
-TODO
+A interface web desenvolvida trás de uma melhor forma os dados expostos pela API. Para visualizar as telas, veja o pdf anexo. 
+
 #### Operação
+Abaixo as páginas disponíveis.
+- $(minikube ip)/numTweets: Retorna um gráfico de linha com o número de tweets salvos pela hora de criação, salvos no banco de dados.
+- $(minikube ip)/mostFolowed/<hashtag>/<int:number>: retorna um gráfico de barra com a quantidade de seguidores, dos seguidores mais seguidos, é possível filtrar por hashtag e o número de resultados.
+- $(minikube ip)/getByCountry/<hashtag>: Retorna uma tabela com o número de tweets por localização. É possível filtrar pela hashtag. 
+- $(minikube ip)/getByLang/<hashtag>: Retorna uma tabela com o número de tweets por língua. É possível filtrar pela hashtag.
+
 #### Melhorias
- 
+- Adionar portal para acessar as paginas secundarias;
+- Adicionar a lib de log;
+
 ### ELK
-TODO
-#### Operação
-#### Melhorias
- 
+Olhar pdf em anexo.
+
 ### Deploy
-TODO
-#### Operação
-#### Melhorias
+Para fazer o deploy de toda infraestrutura e aplicações um script foi criado chamado de deploy.sh. Uso: ./deploy.sh [OPÇÕES]:
+- -a    Realiza deploy de todas release
+- -i    Realiza deploy das releases de ferramentas
+- -u    Realiza deploy das releases das aplicações
+- -p    OBRIGATÓRIO: passord para realizar deploy da aplicação save-tweets
+- -h    Exibe ajuda.
+Esse script realiza helm upgrade ou helm delete das aplicações. Além disso auxilia a passar a senha necessária para a aplicação de coleta de tweets funcionar. para um deploy te toda
+
+Para obter o ip do minikube: $ minikube ip
+Endpoints: 
+- $(minikube ip):3002 - Kibana
+- $(minikube ip):3003 - API
+- $(minikube ip):3004 - Interface Web
+
+DockerHub com as imagens:
+https://hub.docker.com/repository/docker/leonardomontero/twitter-api-case
 

@@ -1,15 +1,14 @@
 #!/bin/bash
-set -e
- 
+set -e 
 
 print_help() {
             echo "Uso: $0 [OPÇÕES]..."
             echo 'Script para auxiliar no deploy'
             echo
-            echo '-a    Realiza deloy de todas release'
-            echo '-i    Realiza depoy das releases de ferramentas'
+            echo '-a    Realiza deploy de todas release'
+            echo '-i    Realiza deploy das releases de ferramentas'
             echo '-u    Realiza deploy das releases das aplicações'
-            echo '-p    OBRIGATORIO: passord para relizar deploy da aplicação save-tweets'
+            echo '-p    OBRIGATORIO: passord para realizar deploy da aplicação save-tweets'
             echo '-h    Exibe ajuda.'
 }
 

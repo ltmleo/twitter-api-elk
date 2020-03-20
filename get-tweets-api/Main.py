@@ -13,7 +13,7 @@ api = Api(app, version='1.0', title='Get Tweets API',
     description='An API to get tweets',
 )
 
-apm = ElasticAPM(app, server_url='http://apm-server-apm-server:8200', service_name='get-tweets-api', logging=False)
+apm = ElasticAPM(app, server_url='http://apm-server-apm-server:8200', service_name='get-tweets-api', logging=True)
 
 @api.doc(params={'topic': 'An hashtag (without #)', "number": "size of response (default 5)"}, responses={ 200: 'List the most followed users per topic'})
 class MostFolowed(Resource):
